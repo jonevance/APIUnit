@@ -1,0 +1,12 @@
+{
+  "test":
+  {
+    "method": "get",
+    "uri": "http://apiunit.popelli.com/Customers/6",
+    "name": "GetCustomer",
+    "headers":
+    {  
+      "HTTPStatusCode": 200
+    }
+  }
+}

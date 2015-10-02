@@ -94,12 +94,12 @@ else
 // if no input file was specified, prompt for one
 if (!isset($sInputFile))
 {
-  echo "\nEnter input file name [rest.json]: ";
+  echo "\nEnter input file name [apiunit.json]: ";
   
   $sInputFile = trim(fgets(STDIN));
   
   if (strlen($sInputFile) == 0)
-    $sInputFile = "rest.json";
+    $sInputFile = "apiunit.json";
 }
 
 // check for input file

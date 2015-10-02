@@ -1,0 +1,47 @@
+{
+  "suite":
+  [
+    {
+      "name": "Gets",
+      
+      "test":
+      [
+        {
+          "method": "get",
+          "uri": "http://apiunit.popelli.com/helloworld.html",
+          "output": "Hello, world"
+        },
+        {
+          "method": "get",
+          "name": "SecondGet",
+          "uri": "http://apiunit.popelli.com/helloworld.html",
+          "output": "Hello, world"
+        }
+      ]
+    },
+    {
+      "name": "Puts",
+      
+      "test":
+      [
+        {
+          "method": "put",
+          "uri": "http://apiunit.popelli.com/Customers/100",
+          "data":
+          {
+            "Phone": "111-111-1111"
+          }
+        },
+        {
+          "method": "put",
+          "name": "SecondPut",
+          "uri": "http://apiunit.popelli.com/Customers/101",
+          "data":
+          {
+            "Phone": "222-222-2222"
+          }
+        }
+      ]
+    }
+  ]    
+}

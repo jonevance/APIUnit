@@ -1,0 +1,126 @@
+{
+  "baseuri": "http://apiunit.popelli.com/",
+  "suite":
+  [
+    {
+      "name": "Customers",
+      "test":
+      [
+        {
+          "uri": "Customers",
+          "method": "post",
+          "data":
+          {
+            "Email": "mail@gmail.com",
+            "First": "Bob",
+            "Last": "Smith"
+          },
+          "output":
+          {
+            "Customer":
+            {
+              "ID": "/([0-9])+/",
+              "First": "Bob",
+              "Last": "Smith"
+            }
+          }
+        }, 
+        {
+          "uri": "Customers/$1",
+          "method": "put",
+          "data":
+          {
+            "First": "Bill",
+            "Last": "Jones"
+          },
+          "headers":
+          {
+            "HTTPStatusCode": 200
+          }
+        }, 
+        {
+          "uri": "Customers/$1",
+          "method": "get",
+          "output":
+          {
+            "Customer":
+            {
+              "ID": "/([0-9])+/",
+              "First": "Bill",
+              "Last": "Jones"
+            }
+          }
+        }, 
+        {
+          "uri": "Customers/$1",
+          "method": "delete",
+          "headers":
+          {
+            "HTTPStatusCode": 200
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "test":
+      [
+        {
+          "uri": "Employees",
+          "method": "post",
+          "data":
+          {
+            "Email": "mail@gmail.com",
+            "First": "Bob",
+            "Last": "Smith"
+          },
+          "output":
+          {
+            "Employee":
+            {
+              "ID": "/([0-9])+/",
+              "First": "Bob",
+              "Last": "Smith",
+              "SSN": "/[0-9]{3}-[0-9]{2}-[0-9]{4}/"
+            }
+          }
+        }, 
+        {
+          "uri": "Employees/$1",
+          "method": "put",
+          "data":
+          {
+            "First": "Bill",
+            "Last": "Jones"
+          },
+          "headers":
+          {
+            "HTTPStatusCode": 200
+          }
+        }, 
+        {
+          "uri": "Employees/$1",
+          "method": "get",
+          "output":
+          {
+            "Employee":
+            {
+              "ID": "/([0-9])+/",
+              "First": "Bill",
+              "Last": "Jones",
+              "SSN": "/[0-9]{3}-[0-9]{2}-[0-9]{4}/"
+            }
+          }
+        }, 
+        {
+          "uri": "Employees/$1",
+          "method": "delete",
+          "headers":
+          {
+            "HTTPStatusCode": 200
+          }
+        }
+      ]
+    }
+  ]
+}

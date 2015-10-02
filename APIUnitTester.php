@@ -298,11 +298,21 @@ class APIUnitTester extends PHPUnit_Framework_TestCase
         case "<number>": $b = is_numeric($result); break;
         case "<email>": $b = filter_var($result, FILTER_VALIDATE_EMAIL); break;
         case "<string>": $b = is_string($result); break;
+        case "<char>": $sValid = "<char(1)>";
 
         default:
 
+          // character arrays have specified lengths
+          if (!strncmp($sValid, "char(", 5))
+          {
+            $n = intval(substr($sValid, 5));
+          
+            if (strlen($result) != $n)
+              $b = false;
+          }
+          
           // strings can have minimum and maximum lengths
-          if (!strncmp($sValid, "string(", 7))
+          else if (!strncmp($sValid, "string(", 7))
           {
             if (strpos($sValid, ',') > 0)
               list($nMin, $nMax) = explode(',', substr($sValid, 7));

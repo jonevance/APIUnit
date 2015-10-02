@@ -1,0 +1,16 @@
+{
+  "test":
+  [
+    {
+      "method": "get",
+      "uri": "http://apiunit.popelli.com/helloworld.html",
+      "output": "Hello, world"
+    },
+    {
+      "method": "get",
+      "name": "SecondGet",
+      "uri": "http://apiunit.popelli.com/helloworld.html",
+      "output": "Hello, world"
+    }
+  ]
+}

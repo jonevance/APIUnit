@@ -69,7 +69,7 @@ Here is an example of a simple test:
 }
 ```
 
-Save this as "simple.json" and execute `apiunit simple.json` - you should now have a directory called "tests" with a 
+Save this as "simple.json" and execute `apiunit simple.json`. You should now have a directory called "tests" with a 
 file called GetTest.php.  This file is a script that is ready to be used with [PHPUnit](https://phpunit.de) like this:
 `phpunit tests/GetTest.php`.
 

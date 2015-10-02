@@ -44,14 +44,24 @@ class APIUnitTest
       {
         $this->Name = ucfirst($o->method);
       
-        if ((!empty($o->uri)) && (strpos($o->uri, "/") === false))
-          $this->Name .= ucfirst($o->uri);
+        if (!empty($o->uri))
+        {
+          $n = strpos($o->uri, "/");
+          
+          if ($n === false)
+            $this->Name .= ucfirst($o->uri);
+          
+          else
+            $this->Name .= ucfirst(substr($o->uri, 0, $n));
+        }
       }
       
       if (!strncmp($this->Name, "test", 4))
         $this->Name = substr($this->Name, 4);
       
       // make sure the name is unique within suite or group
+      $sThis = "Test $this->Name";
+      
       if (isset($oSuite))
       {
         if (!isset($oSuite->testnames))
@@ -67,8 +77,6 @@ class APIUnitTest
       
       else
       {
-        $sThis = "Test $this->Name";
-        
         if (!isset($oBase->testnames))
           $oBase->testnames = array();
         
@@ -106,11 +114,11 @@ class APIUnitTest
       // validate / construct uri
       $sBaseURI = "";
       
-      if (!empty($oSuite->baseuri))
-        $sBaseURI = $oSuite->baseuri;
+      $this->getLowestLevel($oBase, "baseuri");
       
-      else if (!empty($oBase->baseuri))
-        $sBaseURI = $oBase->baseuri;
+      $sBaseURI = isset($o->baseuri) ? $o->baseuri : "";
+      
+      unset($o->baseuri);
       
       if ((!empty($sBaseURI)) && ((!isset($o->uri)) || (strncmp($o->uri, "http", 4))))
       {
