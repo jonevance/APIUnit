@@ -174,27 +174,30 @@ class APIUnitTester extends PHPUnit_Framework_TestCase
     if (!empty($sParentKey))
       $sParentKey = "$sParentKey:";
 
-    foreach ($oResult as $sKey => $result)
+    if (!empty($oResult))
     {
-      // first check is the simplest - unexpected key
-      if (!isset($oValid->$sKey))
-        return $sParentKey.$sKey." in result is unexpected";
-
-      // track which keys are checked
-      $setChecked[$sKey] = true;
-
-      // the validator may just require something
-      $valid = &$oValid->$sKey;
-
-      if ($valid == "<exists>")
-        continue;
-
-      $s = $this->compareValue($sParentKey.$sKey, $result, $valid);
-
-      if (!empty($s))
-        return $s;
+      foreach ($oResult as $sKey => $result)
+      {
+        // first check is the simplest - unexpected key
+        if (!isset($oValid->$sKey))
+          return $sParentKey.$sKey." in result is unexpected";
+  
+        // track which keys are checked
+        $setChecked[$sKey] = true;
+  
+        // the validator may just require something
+        $valid = &$oValid->$sKey;
+  
+        if ($valid == "<exists>")
+          continue;
+  
+        $s = $this->compareValue($sParentKey.$sKey, $result, $valid);
+  
+        if (!empty($s))
+          return $s;
+      }
     }
-
+    
     // now make sure there is no data missing from the result
     foreach ($oValid as $sKey => $valid)
     {
@@ -280,7 +283,7 @@ class APIUnitTester extends PHPUnit_Framework_TestCase
       {
         // if there are any stored values, hold onto them for later
         if (count($asMatches) > 1)
-          APIUnitTester::$s_asMatches = array_merge(APIUnitTester::$s_asMatches, $asMatches);
+          APIUnitTester::$s_asMatches = array_merge(APIUnitTester::$s_asMatches, array_slice($asMatches, 1));
 
         return null;
       }
